@@ -1,6 +1,5 @@
-package br.com.project.appdeteste.ui.theme
+package br.com.project.gassaver.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

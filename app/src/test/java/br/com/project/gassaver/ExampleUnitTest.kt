@@ -1,4 +1,4 @@
-package br.com.project.appdeteste
+package br.com.project.gassaver
 
 import org.junit.Test
 

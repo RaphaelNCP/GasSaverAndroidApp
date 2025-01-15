@@ -1,4 +1,4 @@
-package br.com.project.appdeteste.ui.theme
+package br.com.project.gassaver.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

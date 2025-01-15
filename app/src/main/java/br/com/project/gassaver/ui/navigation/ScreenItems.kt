@@ -1,8 +1,9 @@
-package br.com.project.appdeteste.ui.navigation
+package br.com.project.gassaver.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.AddCircleOutline
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -21,15 +22,11 @@ sealed class ScreenItem(
     val bottomBarItem: BottomAppBarItem
 ) {
     data object Home : ScreenItem(
-        topBarItem = TopAppBarItem("Home", listOf(Icons.Default.Home)),
+        topBarItem = TopAppBarItem("Gas Saver", emptyList()),
         bottomBarItem = BottomAppBarItem("Home", Icons.Default.Home)
     )
-    data object Add : ScreenItem(
-        topBarItem = TopAppBarItem("Adicionar", listOf(Icons.Default.AddCircleOutline)),
-        bottomBarItem = BottomAppBarItem("Adicionar", Icons.Default.AddCircleOutline)
-    )
-    data object Settings : ScreenItem(
-        topBarItem = TopAppBarItem("Configurações", listOf(Icons.AutoMirrored.Filled.List)),
-        bottomBarItem = BottomAppBarItem("Configurações", Icons.AutoMirrored.Filled.List)
+    data object History : ScreenItem(
+        topBarItem = TopAppBarItem("Histórico", emptyList()),
+        bottomBarItem = BottomAppBarItem("Histórico", Icons.Default.History)
     )
 }
