@@ -32,10 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.project.gassaver.ui.navigation.ScreenItem
 import br.com.project.gassaver.ui.screens.AddScreen
-import br.com.project.gassaver.ui.screens.HomeScreen
+import br.com.project.gassaver.ui.screens.home.HomeScreen
 import br.com.project.gassaver.ui.theme.AppDeTesteTheme
 import br.com.project.gassaver.ui.theme.Navy
-import br.com.project.gassaver.ui.theme.Teal
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +109,6 @@ fun App(modifier: Modifier = Modifier) {
                             colors = NavigationBarItemDefaults.colors(
                                 selectedTextColor = Navy,
                                 indicatorColor = Navy,
-
                             )
                         )
                     }
