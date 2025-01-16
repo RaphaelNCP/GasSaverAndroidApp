@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import br.com.project.gassaver.ui.theme.Background
 import br.com.project.gassaver.ui.theme.Navy
 
 @Composable
@@ -41,14 +42,15 @@ fun GasSaverRowRadioButtom(optins: List<String>, onOptionSelected: (String) -> U
                     selected = (text == optionSelected),
                     onClick = null,
                     colors = RadioButtonDefaults.colors(
-                        selectedColor = Navy,
-                        unselectedColor = Navy
+                        selectedColor = Background,
+                        unselectedColor = Background
                     )
                 )
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(start = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp),
+                    color = Background
                 )
             }
         }

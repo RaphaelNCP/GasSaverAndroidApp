@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.project.gassaver.data.repository.RoutesTakenRepository
+import br.com.project.gassaver.domain.usecase.SaveRouteTakenUseCase
 import br.com.project.gassaver.ui.navigation.ScreenItem
 import br.com.project.gassaver.ui.screens.AddScreen
 import br.com.project.gassaver.ui.screens.home.HomeScreen
@@ -119,7 +121,9 @@ fun App(modifier: Modifier = Modifier) {
     ) { innerPadding ->
         HorizontalPager(state = pagerState, modifier = Modifier.padding(innerPadding)) { page ->
             when (screens[page]) {
-                ScreenItem.Home -> HomeScreen()
+                ScreenItem.Home -> HomeScreen(
+                    saveFuelRecordUseCase = SaveRouteTakenUseCase(RoutesTakenRepository()),
+                )
                 ScreenItem.History -> AddScreen()
             }
         }

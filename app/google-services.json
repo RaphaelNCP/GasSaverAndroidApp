@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546406350874",
+    "project_id": "gassaver-2d1be",
+    "storage_bucket": "gassaver-2d1be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546406350874:android:17fcb36a13e1d0ae6c11a3",
+        "android_client_info": {
+          "package_name": "br.com.project.gassaver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKv4_0aC2Xw7Qxv_rg7BA4rmey9cs51Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,14 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "br.com.project.appdeteste"
+    namespace = "br.com.project.gassaver"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "br.com.project.appdeteste"
+        applicationId = "br.com.project.gassaver"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
@@ -54,6 +55,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firestore)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)

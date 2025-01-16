@@ -7,7 +7,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import br.com.project.gassaver.ui.theme.Background
 import br.com.project.gassaver.ui.theme.Navy
+import br.com.project.gassaver.ui.theme.Teal
 
 @Composable
 fun GasSaverDoubleTextField(label: String, value: Double, onValueChange: (Double) -> Unit) {
@@ -24,7 +26,10 @@ fun GasSaverDoubleTextField(label: String, value: Double, onValueChange: (Double
             unfocusedTextColor = Navy,
             focusedContainerColor = White,
             unfocusedContainerColor = White,
-            focusedIndicatorColor = Navy,
+            focusedIndicatorColor = Background,
+            unfocusedLabelColor = Teal,
+            focusedLabelColor = Background,
+
         )
     )
 }
