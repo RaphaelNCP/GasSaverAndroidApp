@@ -9,9 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -23,10 +24,12 @@ import br.com.project.gassaver.ui.components.GasSaverTextButton
 import br.com.project.gassaver.ui.screens.home.HomeUiState
 import br.com.project.gassaver.ui.screens.home.HomeViewModel
 import br.com.project.gassaver.ui.theme.Navy
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @Composable
 fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptions: List<String>, hasRegisteredVehicles: List<String>, buttonIsEnabled: Boolean) {
+
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         GasSaverSubtitle(text = "Preço do litro:")
         GasSaverRowRadioButtom(
@@ -123,14 +126,16 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
                 ) {
                     GasSaverButton(text = "Adicionar", modifier = Modifier.weight(1f)) {
                         viewModel.addRouteTaken()
+                        viewModel.resetValues()
+                        viewModel.routeTakenRegisterIsOpened(false)
                     }
+
                     GasSaverTextButton(text = "Limpar", modifier = Modifier.weight(1f)) {
                         viewModel.resetValues()
+                        viewModel.routeTakenRegisterIsOpened(false)
                     }
                 }
-
             }
-
         }
     }
 }

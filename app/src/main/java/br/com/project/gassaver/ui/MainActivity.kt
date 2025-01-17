@@ -31,7 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.project.gassaver.data.repository.RoutesTakenRepository
+import br.com.project.gassaver.data.repository.VehicleRegisterRepository
+import br.com.project.gassaver.domain.usecase.GetVehicleUseCase
 import br.com.project.gassaver.domain.usecase.SaveRouteTakenUseCase
+import br.com.project.gassaver.domain.usecase.SaveVehicleUseCase
 import br.com.project.gassaver.ui.navigation.ScreenItem
 import br.com.project.gassaver.ui.screens.AddScreen
 import br.com.project.gassaver.ui.screens.home.HomeScreen
@@ -123,6 +126,8 @@ fun App(modifier: Modifier = Modifier) {
             when (screens[page]) {
                 ScreenItem.Home -> HomeScreen(
                     saveFuelRecordUseCase = SaveRouteTakenUseCase(RoutesTakenRepository()),
+                    getVehicleUseCase = GetVehicleUseCase(VehicleRegisterRepository()),
+                    saveVehicleUseCase = SaveVehicleUseCase(VehicleRegisterRepository())
                 )
                 ScreenItem.History -> AddScreen()
             }

@@ -49,7 +49,9 @@ fun GasSaverTextField(label: String, value: String, onValueChange: (String) -> U
             unfocusedTextColor = Navy,
             focusedContainerColor = White,
             unfocusedContainerColor = White,
-            focusedIndicatorColor = Navy,
+            focusedIndicatorColor = Background,
+            unfocusedLabelColor = Teal,
+            focusedLabelColor = Background,
         )
     )
 
