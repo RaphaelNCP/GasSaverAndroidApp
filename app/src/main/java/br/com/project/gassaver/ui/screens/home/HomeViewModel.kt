@@ -28,7 +28,8 @@ class HomeViewModel(
             val routeTaken =
                 RoutesTakenModel(
                     id = UUID.randomUUID().toString(),
-                    fuelType = _uiState.value.selectedVehicle,
+                    routeName = _uiState.value.routeName,
+                    fuelType = _uiState.value.selectedVehicleType,
                     fuelPrice = _uiState.value.fuelPrice.toString(),
                     fuelConsumption = _uiState.value.fuelConsumption.toString(),
                     distance = _uiState.value.distance.toString(),
@@ -59,8 +60,12 @@ class HomeViewModel(
         }
     }
 
-    fun onVehicleSelected(selectedVehicle: String) {
-        _uiState.value = _uiState.value.copy(selectedVehicle = selectedVehicle)
+    fun onRouteNameChange(routeName: String) {
+        _uiState.value = _uiState.value.copy(routeName = routeName)
+    }
+
+    fun onVehicleTypeSelected(selectedVehicle: String) {
+        _uiState.value = _uiState.value.copy(selectedVehicleType = selectedVehicle)
     }
 
     fun onHasRegisteredVehicleSelected(hasRegisteredVehicle: String) {
@@ -110,6 +115,10 @@ class HomeViewModel(
 
     fun onVehicleFuelConsumptionChange(vehicleFuelConsumption: Double) {
         _uiState.value = _uiState.value.copy(vehicleFuelConsumption = vehicleFuelConsumption)
+    }
+
+    fun onSelectedVehicleIdChange(selectedVehicleId: String) {
+        _uiState.value = _uiState.value.copy(selectedVehicleId = selectedVehicleId)
     }
 
     fun resetValues() {

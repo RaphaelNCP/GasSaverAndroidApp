@@ -2,6 +2,7 @@ package br.com.project.gassaver.ui.screens.home.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,36 +10,53 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import br.com.project.gassaver.data.model.VehicleRegisterModel
 import br.com.project.gassaver.ui.components.GasSaverButton
 import br.com.project.gassaver.ui.components.GasSaverDoubleTextField
 import br.com.project.gassaver.ui.components.GasSaverRowRadioButtom
 import br.com.project.gassaver.ui.components.GasSaverSubtitle
+import br.com.project.gassaver.ui.components.GasSaverText
 import br.com.project.gassaver.ui.components.GasSaverTextButton
+import br.com.project.gassaver.ui.components.GasSaverTextField
 import br.com.project.gassaver.ui.screens.home.HomeUiState
 import br.com.project.gassaver.ui.screens.home.HomeViewModel
+import br.com.project.gassaver.ui.theme.Background
 import br.com.project.gassaver.ui.theme.Navy
-import kotlinx.coroutines.launch
 import java.util.Locale
 
 @Composable
-fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptions: List<String>, hasRegisteredVehicles: List<String>, buttonIsEnabled: Boolean) {
+fun RouteTakenContent(
+    viewModel: HomeViewModel,
+    state: HomeUiState,
+    vehicleOptions: List<String>,
+    hasRegisteredVehicles: List<String>,
+    buttonIsEnabled: Boolean,
+    vehicleList: List<VehicleRegisterModel>
+) {
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        GasSaverSubtitle(text = "Nome da rota:")
+        GasSaverTextField(
+            label = "Nome da rota",
+            value = state.routeName
+        ) { value ->
+            viewModel.onRouteNameChange(value)
+        }
         GasSaverSubtitle(text = "Preço do litro:")
         GasSaverRowRadioButtom(
             optins = vehicleOptions,
-            onOptionSelected = viewModel::onVehicleSelected,
-            optionSelected = state.selectedVehicle
+            onOptionSelected = viewModel::onVehicleTypeSelected,
+            optionSelected = state.selectedVehicleType
         )
 
-        if (state.selectedVehicle == "Gasolina") {
+        if (state.selectedVehicleType == "Gasolina") {
             GasSaverDoubleTextField(
                 label = "Preço da gasolina",
                 value = state.fuelPrice
@@ -62,25 +80,9 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
         )
 
         if (state.hasRegisteredVehicle == "Sim") {
-            GasSaverSubtitle(text = "Consumo medio (Km/Litro):")
-
-            if (state.selectedVehicle == "Gasolina") {
-                GasSaverDoubleTextField(
-                    label = "Km/Litro de gasolina",
-                    value = state.fuelConsumption
-                ) { value ->
-                    viewModel.onFuelConsumptionChange(value)
-                }
-            } else {
-                GasSaverDoubleTextField(
-                    label = "Km/Litro de álcool",
-                    value = state.fuelConsumption
-                ) { value ->
-                    viewModel.onFuelConsumptionChange(value)
-                }
-            }
+            haveRegisteredVehiclesContent(viewModel, state, vehicleList)
         } else {
-            //TODO: Implementar a busca de veículos cadastrados
+            DontHaveRegisteredVehiclesContent(viewModel, state)
         }
 
         GasSaverSubtitle(text = "Km percorridos:")
@@ -92,7 +94,11 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
             viewModel.onDistanceChange(value)
         }
 
-        GasSaverButton(text = "Calcular consumo", enable = buttonIsEnabled, modifier = Modifier.fillMaxWidth()) {
+        GasSaverButton(
+            text = "Calcular consumo",
+            enable = buttonIsEnabled,
+            modifier = Modifier.fillMaxWidth()
+        ) {
 
             viewModel.calculateFuelConsumption()
 
@@ -113,7 +119,7 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
                     GasSaverSubtitle(
                         text = String.format(
                             Locale("pt", "BR"),
-                            "Consumo estimado: %.2f",
+                            "Consumo estimado: R$ %.2f",
                             state.fuelConsumptionResult
                         )
                     )
@@ -124,7 +130,7 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    GasSaverButton(text = "Adicionar", modifier = Modifier.weight(1f)) {
+                    GasSaverButton(text = "Adicionar", modifier = Modifier.weight(1f), enable = true) {
                         viewModel.addRouteTaken()
                         viewModel.resetValues()
                         viewModel.routeTakenRegisterIsOpened(false)
@@ -139,3 +145,94 @@ fun RouteTakenContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptio
         }
     }
 }
+
+@Composable
+fun haveRegisteredVehiclesContent(viewModel: HomeViewModel, state: HomeUiState, vehicleList: List<VehicleRegisterModel>) {
+    if (state.selectedVehicleId.isEmpty()) {
+        Column {
+            vehicleList.forEach { vehicle ->
+                ListItem(modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(6.dp))
+                    .border(
+                        width = 1.dp,
+                        color = Background,
+                        shape = RoundedCornerShape(6.dp)
+                    ),
+                    colors = ListItemDefaults.colors(
+                        containerColor = Navy
+                    ),
+                    headlineContent = {
+                        GasSaverSubtitle(text = vehicle.name)
+                    },
+                    supportingContent = {
+                        GasSaverText(text = vehicle.plate)
+                    },
+                    trailingContent = {
+                        GasSaverTextButton(text = "Selecionar") {
+                            viewModel.onFuelConsumptionChange(vehicle.fuelConsumption.toDouble())
+                            viewModel.onSelectedVehicleIdChange(vehicle.id)
+                        }
+                    })
+                Spacer(modifier = Modifier.size(12.dp))
+            }
+        }
+    } else {
+        vehicleList.forEach { vehicle ->
+            if (vehicle.id == state.selectedVehicleId) {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    ListItem(modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(6.dp))
+                        .border(
+                            width = 1.dp,
+                            color = Background,
+                            shape = RoundedCornerShape(6.dp)
+                        ),
+                        colors = ListItemDefaults.colors(
+                            containerColor = Navy
+                        ),
+                        headlineContent = {
+                            GasSaverSubtitle(text = vehicle.name)
+                        },
+                        supportingContent = {
+                            GasSaverText(text = vehicle.plate)
+                        },
+                        trailingContent = {
+                            Column {
+                                GasSaverText(text = "Consumo:")
+                                GasSaverText(text = vehicle.fuelConsumption)
+
+                            }
+                        }
+                    )
+                }
+            }
+        }
+
+    }
+}
+
+@Composable
+fun DontHaveRegisteredVehiclesContent(viewModel: HomeViewModel, state: HomeUiState) {
+    GasSaverSubtitle(text = "Consumo medio (Km/Litro):")
+
+    if (state.selectedVehicleType == "Gasolina") {
+        GasSaverDoubleTextField(
+            label = "Km/Litro de gasolina",
+            value = state.fuelConsumption
+        ) { value ->
+            viewModel.onFuelConsumptionChange(value)
+        }
+    } else {
+        GasSaverDoubleTextField(
+            label = "Km/Litro de álcool",
+            value = state.fuelConsumption
+        ) { value ->
+            viewModel.onFuelConsumptionChange(value)
+        }
+    }
+}
+
+
+

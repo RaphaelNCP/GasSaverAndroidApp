@@ -16,7 +16,9 @@ class RoutesTakenRepository {
     // Obter todos os registros
     suspend fun getRouteTaken(): List<RoutesTakenModel> {
         val snapshot = collection.get().await()
-        return snapshot.documents.mapNotNull { it.toObject(RoutesTakenModel::class.java) }
+        return snapshot.documents.mapNotNull { doc ->
+            doc.toObject(RoutesTakenModel::class.java)?.copy(id = doc.id)
+        }
     }
 
     // Atualizar um registro

@@ -5,7 +5,8 @@ import br.com.project.gassaver.data.model.VehicleRegisterModel
 data class HomeUiState (
     val isLoading: Boolean = false,
     val error: Throwable? = null,
-    val selectedVehicle: String = "Gasolina",
+    val routeName: String = "",
+    val selectedVehicleType: String = "Gasolina",
     val hasRegisteredVehicle: String = "Sim",
     val fuelPrice: Double = 0.0,
     val fuelConsumption: Double = 0.0,
@@ -17,6 +18,8 @@ data class HomeUiState (
     val vehiclePlate: String = "",
     val vehicleFuelType: String = "Gasolina",
     val vehicleFuelConsumption: Double = 0.0,
-    val vehicleList: List<VehicleRegisterModel> = emptyList()
+    val vehicleList: List<VehicleRegisterModel> = emptyList(),
+    val selectedVehicleId: String = "",
 
-)
+
+    )

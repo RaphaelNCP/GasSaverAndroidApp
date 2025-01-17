@@ -16,7 +16,9 @@ class VehicleRegisterRepository {
     // Obter todos os registros
     suspend fun getVehicleRegister(): List<VehicleRegisterModel> {
         val snapshot = collection.get().await()
-        return snapshot.documents.mapNotNull { it.toObject(VehicleRegisterModel::class.java) }
+        return snapshot.documents.mapNotNull { doc ->
+            doc.toObject(VehicleRegisterModel::class.java)?.copy(id = doc.id)
+        }
     }
 
     // Atualizar um registro

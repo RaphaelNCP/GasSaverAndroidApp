@@ -1,12 +1,16 @@
 package br.com.project.gassaver.ui.components
 
+import android.text.InputType
+import android.text.InputType.TYPE_CLASS_NUMBER
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.text.input.KeyboardType
 import br.com.project.gassaver.ui.theme.Background
 import br.com.project.gassaver.ui.theme.Navy
 import br.com.project.gassaver.ui.theme.Teal
@@ -52,7 +56,8 @@ fun GasSaverTextField(label: String, value: String, onValueChange: (String) -> U
             focusedIndicatorColor = Background,
             unfocusedLabelColor = Teal,
             focusedLabelColor = Background,
-        )
+        ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
 }

@@ -32,12 +32,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.project.gassaver.data.repository.RoutesTakenRepository
 import br.com.project.gassaver.data.repository.VehicleRegisterRepository
+import br.com.project.gassaver.domain.usecase.DeleteRouteTakenUseCase
+import br.com.project.gassaver.domain.usecase.DeleteVehicleUseCase
+import br.com.project.gassaver.domain.usecase.GetRouteTakenUseCase
 import br.com.project.gassaver.domain.usecase.GetVehicleUseCase
 import br.com.project.gassaver.domain.usecase.SaveRouteTakenUseCase
 import br.com.project.gassaver.domain.usecase.SaveVehicleUseCase
 import br.com.project.gassaver.ui.navigation.ScreenItem
-import br.com.project.gassaver.ui.screens.AddScreen
+import br.com.project.gassaver.ui.screens.sevedRoutes.SavedRoutesScreen
 import br.com.project.gassaver.ui.screens.home.HomeScreen
+import br.com.project.gassaver.ui.screens.savedVehicles.SavedVehiclesScreen
 import br.com.project.gassaver.ui.theme.AppDeTesteTheme
 import br.com.project.gassaver.ui.theme.Navy
 
@@ -59,7 +63,8 @@ fun App(modifier: Modifier = Modifier) {
     val screens = remember {
         listOf(
             ScreenItem.Home,
-            ScreenItem.History,
+            ScreenItem.SavedRoutes,
+            ScreenItem.SavedVehicles
         )
     }
 
@@ -129,7 +134,14 @@ fun App(modifier: Modifier = Modifier) {
                     getVehicleUseCase = GetVehicleUseCase(VehicleRegisterRepository()),
                     saveVehicleUseCase = SaveVehicleUseCase(VehicleRegisterRepository())
                 )
-                ScreenItem.History -> AddScreen()
+                ScreenItem.SavedRoutes -> SavedRoutesScreen(
+                    getRouteTakenUseCase = GetRouteTakenUseCase(RoutesTakenRepository()),
+                    deleteRouteTakenUseCase = DeleteRouteTakenUseCase(RoutesTakenRepository())
+                )
+                ScreenItem.SavedVehicles -> SavedVehiclesScreen(
+                    getVehicleUseCase = GetVehicleUseCase(VehicleRegisterRepository()),
+                    deleteVehicleUseCase = DeleteVehicleUseCase(VehicleRegisterRepository())
+                )
             }
         }
     }

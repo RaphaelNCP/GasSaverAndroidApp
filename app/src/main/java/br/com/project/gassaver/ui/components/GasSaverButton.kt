@@ -16,7 +16,7 @@ import br.com.project.gassaver.ui.theme.Teal
 @Composable
 fun GasSaverButton(
     text: String,
-    enable: Boolean = true,
+    enable: Boolean = false,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {

@@ -13,9 +13,13 @@ import br.com.project.gassaver.ui.components.GasSaverSubtitle
 import br.com.project.gassaver.ui.components.GasSaverTextField
 import br.com.project.gassaver.ui.screens.home.HomeUiState
 import br.com.project.gassaver.ui.screens.home.HomeViewModel
+import java.util.Locale
 
 @Composable
 fun VehicleRegisterContent(viewModel: HomeViewModel, state: HomeUiState, vehicleOptions: List<String>) {
+
+    val buttonIsEnabled = (state.vehicleName.isNotEmpty() && state.vehiclePlate.isNotEmpty() && state.vehicleFuelConsumption != 0.0 && state.vehicleFuelType.isNotEmpty())
+
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         GasSaverSubtitle(text = "Nome do veículo:")
         GasSaverTextField(label = "Nome do veículo", value = state.vehicleName) {
@@ -23,7 +27,7 @@ fun VehicleRegisterContent(viewModel: HomeViewModel, state: HomeUiState, vehicle
         }
         GasSaverSubtitle(text = "Placa do veículo:")
         GasSaverTextField(label = "Placa do veículo", value = state.vehiclePlate) {
-            viewModel.onVehiclePlateChange(it)
+            viewModel.onVehiclePlateChange(it.uppercase(Locale.getDefault()))
         }
         GasSaverSubtitle(text = "Tipo de combustível:")
         GasSaverRowRadioButtom(
@@ -37,7 +41,10 @@ fun VehicleRegisterContent(viewModel: HomeViewModel, state: HomeUiState, vehicle
         }
         GasSaverButton(modifier = Modifier.fillMaxWidth() ,text = "Salvar veículo", onClick = {
             viewModel.addVehicleRegister()
-            viewModel.vehicleRegisterIsOpened(false)
-        })
+            viewModel.resetValues()
+        }, enable = buttonIsEnabled)
+        if (state.vehicleList.size > 5) {
+            GasSaverSubtitle(text = "Você atingiu o limite de veículos cadastrados.")
+        }
     }
 }
