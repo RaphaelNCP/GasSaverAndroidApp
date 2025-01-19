@@ -6,6 +6,12 @@ Este projeto é um exemplo interativo para demonstrar o uso de tecnologias incr�
 
 O GasSaver é uma aplicação mobile nativa android simples que permite aos usuários criar rotas e registrar veículos no intuito de ajudar a calcular o gasto com combustivel no dia a dia ou em momentos específicos. Foi desenvolvido com as seguintes tecnologias:
 
+
+https://github.com/user-attachments/assets/ca6a9944-ea9a-485f-ba03-de8af52224a0
+
+
+
+
 - Linguagem: Kotlin
 - Framework: Jetpack Compose
 - Banco de Dados: FireStore (Firebase)
@@ -23,32 +29,9 @@ A aplicação possui as funcionalidades básicas de CRUD (Create, Read, Update, 
 
 Siga as instruções abaixo para executar o projeto em seu ambiente local:
 
-0. **Pré-Requsitos**
-   
-   Antes de começar, certifique-se de ter instalado no seu computador:
-   - Android Studio (versão recomendada: Giraffe ou superior)
-   - Git (para clonar o repositório)
-   - Emulador Android ou um dispositivo físico para testes
+ **Acesse a release disponibilizada no repositorio**
+ - Acesse o link https://github.com/RaphaelNCP/GasSaverAndroidApp/releases, onde podera baixar o apk do projeto
 
-1. **Clone o repositório:**
-
-   ```
-   git clone https://github.com/RaphaelNCP/GasSaverAndroidApp.git
-   ```
-
-3. **Navegue até o diretório do projeto:**
-
-   ```
-   cd GasSaverAndroidApp
-   ```
-
-4. **Abrir o projeto no Android Studio**
-
- - Abra o Android Studio
- - Clique em "Open" e selecione a pasta do projeto clonado
- - Aguarde o Android Studio sincronizar as dependências (Gradle Sync)
- - Se aparecer um erro de dependência, tente rodar:
-   ```./gradlew build```
 
 ## 📝 Contribuição
 
