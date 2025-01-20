@@ -4,13 +4,13 @@ Este projeto é um exemplo interativo para demonstrar o uso de tecnologias incr�
 
 ## ℹ️ Sobre o Projeto
 
-O GasSaver é uma aplicação mobile nativa android simples que permite aos usuários criar rotas e registrar veículos no intuito de ajudar a calcular o gasto com combustivel no dia a dia ou em momentos específicos. Foi desenvolvido com as seguintes tecnologias:
+O GasSaver é uma aplicação mobile nativa android simples que permite aos usuários criar rotas e registrar veículos no intuito de ajudar a calcular o gasto com combustivel no dia a dia ou em momentos específicos. 
 
 
 https://github.com/user-attachments/assets/ca6a9944-ea9a-485f-ba03-de8af52224a0
 
 
-
+Foi desenvolvido com as seguintes tecnologias:
 
 - Linguagem: Kotlin
 - Framework: Jetpack Compose
