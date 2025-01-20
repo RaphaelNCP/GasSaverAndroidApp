@@ -17,7 +17,7 @@ Foi desenvolvido com as seguintes tecnologias:
 - Banco de Dados: FireStore (Firebase)
 - Arquitetura: MVVM e Clean Architecture (de forma parcial)
 
-A aplicação possui as funcionalidades básicas de CRUD (Create, Read, Update, Delete) para gerenciar tarefas.
+A aplicação possui as funcionalidades básicas de CRUD (Create, Read, Update, Delete) para gerenciar os gastos.
 
 ## 🛠️ Ferramentas Utilizadas
 
